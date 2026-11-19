@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="370" viewBox="0 0 1120 370" role="img" aria-labelledby="title desc">
+  <title id="title">How Kite runs your code</title>
+  <desc id="desc">Kite source goes through module loading, parsing and type checking, then code generation for C, JavaScript, Java or Unity C#. C uses a C compiler, JavaScript runs on Node or a browser, Java uses a JDK, and C# is used in Unity.</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="m0 0 8 4-8 4Z" fill="#688da8"/></marker></defs>
+  <rect width="1120" height="370" rx="20" fill="#101b2a"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="36" y="42" fill="#8ea8be" font-size="12" font-weight="600" letter-spacing="2">FROM SOURCE TO YOUR TARGET</text>
+    <rect x="36" y="145" width="160" height="92" rx="12" fill="#15333e" stroke="#478a8c"/>
+    <text x="56" y="179" fill="#91ebd1" font-size="22" font-weight="600">.kite</text>
+    <text x="56" y="209" fill="#bdd0dc" font-size="14">Your source files</text>
+    <path d="M196 191h48" stroke="#688da8" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="258" y="118" width="238" height="146" rx="12" fill="#192a3c" stroke="#3c536d"/>
+    <text x="280" y="153" fill="#eff6fc" font-size="20" font-weight="600">Kite compiler</text>
+    <text x="280" y="184" fill="#acbfd0" font-size="14">Load modules · Parse</text>
+    <text x="280" y="210" fill="#acbfd0" font-size="14">Check types · Generate code</text>
+    <text x="280" y="240" fill="#7f9bb1" font-size="12">Python standard library</text>
+    <path d="M496 191h42M538 87v208" stroke="#688da8" stroke-width="2" fill="none"/>
+    <g fill="none" stroke="#688da8" stroke-width="2" marker-end="url(#arrow)"><path d="M538 87h40"/><path d="M538 156h40"/><path d="M538 226h40"/><path d="M538 295h40"/></g>
+    <g fill="#172d3c" stroke="#35566a"><rect x="592" y="63" width="142" height="48" rx="9"/><rect x="592" y="132" width="142" height="48" rx="9"/><rect x="592" y="202" width="142" height="48" rx="9"/><rect x="592" y="271" width="142" height="48" rx="9"/></g>
+    <g fill="#91ebd1" font-size="17" font-weight="600"><text x="610" y="94">C</text><text x="610" y="163">JavaScript</text><text x="610" y="233">Java</text><text x="610" y="302">Unity C#</text></g>
+    <g fill="none" stroke="#688da8" stroke-width="2" marker-end="url(#arrow)"><path d="M734 87h38"/><path d="M734 156h38"/><path d="M734 226h38"/><path d="M734 295h38"/></g>
+    <g fill="#e1ecf5" font-size="16"><text x="792" y="82">C compiler → native program</text><text x="792" y="152">Node.js / browser</text><text x="792" y="222">JDK → JVM</text><text x="792" y="291">Unity → game component</text></g>
+    <g fill="#8da7bb" font-size="12"><text x="792" y="103">--run invokes GCC</text><text x="792" y="173">I/O capabilities depend on the host</text><text x="792" y="243">JDK 11 or newer</text><text x="792" y="312">A supported language subset</text></g>
+  </g>
+</svg>

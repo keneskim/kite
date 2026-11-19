@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Kite logo</title>
+  <desc id="desc">An angular teal and blue kite with a curved flight string on a dark rounded square.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#172537"/><stop offset="1" stop-color="#0b1320"/></linearGradient>
+    <linearGradient id="wing" x2="1" y2="1"><stop stop-color="#7de9cc"/><stop offset="1" stop-color="#31bcb4"/></linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="54" fill="url(#bg)"/>
+  <path d="M125 134C105 156 168 158 143 180S105 195 120 214" fill="none" stroke="#8aa7bc" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="m50 90 101-55 39 73-65 49Z" fill="#4f85f3"/>
+  <path d="m50 90 101-55-26 122Z" fill="url(#wing)"/>
+  <path d="m50 90 140 18-65 49Z" fill="#1d739d"/>
+  <path d="m50 90 75 67 17-79Z" fill="#43cfc1"/>
+  <path d="m151 35-26 122M50 90l140 18" fill="none" stroke="#d9fff5" stroke-opacity=".65" stroke-width="2"/>
+  <path d="m142 174 12-1-5 11Z" fill="#77dfc9"/>
+</svg>

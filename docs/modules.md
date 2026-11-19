@@ -47,15 +47,15 @@ p "{marker.label}: ({marker.position.x}, {marker.position.y})"
 
 ```sh
 # C（需要 GCC）
-python kite/kite.py kite/examples/modules/main.kite --run
+python kite.py examples/modules/main.kite --run
 
 # JavaScript（需要 Node.js）
-python kite/kite.py kite/examples/modules/main.kite --js
-node kite/examples/modules/main.js
+python kite.py examples/modules/main.kite --js
+node examples/modules/main.js
 
 # Java（需要 JDK）
-python kite/kite.py kite/examples/modules/main.kite --java
-javac -encoding UTF-8 kite/examples/modules/Main.java
+python kite.py examples/modules/main.kite --java
+javac -encoding UTF-8 examples/modules/Main.java
 java -cp kite/examples/modules Main
 ```
 
@@ -66,7 +66,7 @@ kite: (2, 3)
 kite: (7, 3)
 ```
 
-也可以用 `python kite/kite.py kite/examples/modules/main.kite --unity` 生成 `Main.cs`，在 [Unity](unity.md) 中运行并查看 Console。
+也可以用 `python kite.py examples/modules/main.kite --unity` 生成 `Main.cs`，在 [Unity](unity.md) 中运行并查看 Console。
 
 ## 一维记录数组
 
@@ -106,16 +106,16 @@ rp point in points
 完整可运行示例 [record_arrays.kite](../examples/modules/record_arrays.kite) 还展示了本地 `Marker[]` 参数、负下标赋值、切片独立性和遍历时追加元素。从仓库根目录运行：
 
 ```sh
-python kite/kite.py kite/examples/modules/record_arrays.kite --run
+python kite.py examples/modules/record_arrays.kite --run
 
-python kite/kite.py kite/examples/modules/record_arrays.kite --js
-node kite/examples/modules/record_arrays.js
+python kite.py examples/modules/record_arrays.kite --js
+node examples/modules/record_arrays.js
 
-python kite/kite.py kite/examples/modules/record_arrays.kite --java
-javac -encoding UTF-8 kite/examples/modules/RecordArrays.java
+python kite.py examples/modules/record_arrays.kite --java
+javac -encoding UTF-8 examples/modules/RecordArrays.java
 java -cp kite/examples/modules RecordArrays
 
-python kite/kite.py kite/examples/modules/record_arrays.kite --unity
+python kite.py examples/modules/record_arrays.kite --unity
 ```
 
 Unity 生成的 `RecordArrays.cs` 可用于 [Unity](unity.md)，在 Console 查看输出。C、JavaScript、Java 和 Unity 的预期输出相同：

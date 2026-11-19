@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="430" viewBox="0 0 1280 430" role="img" aria-labelledby="title desc">
+  <title id="title">Kite — small syntax, more places to go</title>
+  <desc id="desc">The Kite programming language. A teal kite travels from concise source code to C, JavaScript, Java and Unity C#.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2=".6"><stop stop-color="#101c2c"/><stop offset="1" stop-color="#0c1320"/></linearGradient>
+    <linearGradient id="mint" x2="1" y2="1"><stop stop-color="#a1f5dc"/><stop offset="1" stop-color="#38c7bc"/></linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#456079" stroke-opacity=".14"/></pattern>
+  </defs>
+  <rect width="1280" height="430" rx="24" fill="url(#bg)"/>
+  <rect width="1280" height="430" rx="24" fill="url(#grid)"/>
+  <path d="M676 350c100 20 40-90 125-117s199 70 253-33 10-117 126-141" fill="none" stroke="#31516c" stroke-width="2" stroke-dasharray="5 10"/>
+  <g transform="translate(64 56)">
+    <rect width="34" height="4" rx="2" fill="#7de9cc"/>
+    <text x="48" y="7" fill="#9bb1c6" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="2.3">THE KITE PROGRAMMING LANGUAGE</text>
+    <text y="122" fill="#f0f7fc" font-family="Segoe UI,Arial,sans-serif" font-size="104" font-weight="700" letter-spacing="-5">Kite<tspan fill="#7de9cc">.</tspan></text>
+    <text y="174" fill="#c9d9e6" font-family="Segoe UI,Arial,sans-serif" font-size="26" letter-spacing="-.3">Small syntax. More places to go.</text>
+    <text y="214" fill="#8fa6bb" font-family="Segoe UI,Arial,sans-serif" font-size="17">Type inference · Modules · Records · Multiple backends</text>
+    <g transform="translate(0 267)" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" text-anchor="middle">
+      <rect width="52" height="34" rx="8" fill="#172d3c" stroke="#35566a"/><text x="26" y="22" fill="#a5f0dc">C</text>
+      <rect x="64" width="120" height="34" rx="8" fill="#172d3c" stroke="#35566a"/><text x="124" y="22" fill="#a5f0dc">JavaScript</text>
+      <rect x="196" width="70" height="34" rx="8" fill="#172d3c" stroke="#35566a"/><text x="231" y="22" fill="#a5f0dc">Java</text>
+      <rect x="278" width="110" height="34" rx="8" fill="#172d3c" stroke="#35566a"/><text x="333" y="22" fill="#a5f0dc">Unity C#</text>
+    </g>
+  </g>
+  <g transform="translate(795 43)">
+    <path d="M195 196c-70 62 73 54 41 108s-100 18-90 67" fill="none" stroke="#91b2ca" stroke-width="3" stroke-linecap="round"/>
+    <path d="m30 105 237-86 83 147-155 78Z" fill="#4f85f3"/>
+    <path d="m30 105 237-86-72 225Z" fill="url(#mint)"/>
+    <path d="m30 105 320 61-155 78Z" fill="#226a9a"/>
+    <path d="m30 105 165 139 34-158Z" fill="#48cbbf"/>
+    <path d="m267 19-72 225M30 105l320 61" fill="none" stroke="#e2fff6" stroke-opacity=".7" stroke-width="2"/>
+    <path d="m238 288 26-6-9 25Z" fill="#80e7cb"/>
+    <circle cx="67" cy="27" r="3" fill="#6a91b0"/>
+    <path d="M331 288h16m-8-8v16" stroke="#48728e" stroke-width="2"/>
+  </g>
+</svg>
