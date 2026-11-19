@@ -1,0 +1,14 @@
+xs = [1, 2, 3]
+ys = xs[1..-1]
+ys[1] = 9
+ys.push(4)
+p xs, ys
+words = ["甲", "乙"]
+words_copy = words[1..-1]
+words_copy[2] = "丙"
+p words[2], words_copy[2]
+m = [[10, 20], [30, 40]]
+row_copy = m[1][1..-1]
+row_copy[1] = 99
+row_copy.push(50)
+p m[1][1], row_copy

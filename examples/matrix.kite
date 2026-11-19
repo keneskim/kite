@@ -1,0 +1,15 @@
+# 杨辉三角（8 行）
+n = 8
+t = mat(n, n, 0)
+
+rp i in 1..n
+    t[i][1] = 1
+    rp j in 1..i
+        if j > 1
+            t[i][j] = t[i - 1][j - 1] + t[i - 1][j]
+
+rp i in 1..n
+    row = ""
+    rp j in 1..i
+        row = row + txt(t[i][j]) + " "
+    p row

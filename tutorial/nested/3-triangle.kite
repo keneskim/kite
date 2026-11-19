@@ -1,0 +1,6 @@
+# 内层用外层：第几行就画几颗
+rp line in 1..5
+    row = ""
+    rp star in 1..line
+        row = row + "*"
+    p row

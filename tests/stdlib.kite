@@ -1,0 +1,16 @@
+xs = [3, 1, 2]
+p "和 =", sum(xs)
+p "平均 =", avg(xs)
+p "最大 =", max(xs)
+p "最小 =", min(xs)
+
+sort(xs)
+p "排序后 =", join(xs, ",")
+
+words = split("banana,apple,cherry", ",")
+p "一共", len(words), "样"
+p "连起来：", join(words, " / ")
+sort(words)
+p join(words, "-")
+p "apple 出现", times(words, "apple"), "次"
+p "有 cherry 吗：", has(words, "cherry")

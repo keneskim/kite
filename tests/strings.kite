@@ -1,0 +1,10 @@
+s = "  kite Language  "
+p "原样：[{s}]"
+p "去空格：[{trim(s)}]"
+p "大写：[{up(trim(s))}]"
+p "小写：[{low(trim(s))}]"
+p "长度：", len(trim(s))
+
+t = "ab" + "cd" + 12
+p "拼接：{t}"
+p "转数字：", num('42') + 1

@@ -1,0 +1,17 @@
+# 只有一种循环：rp
+total = 0
+rp 1..5
+    total = total + count
+p "1..5 加起来 =", total
+
+rp 2
+    p "第 {count} 次"
+
+n = 3
+rp ut n <= 0
+    p "倒计时 {n}"
+    n = n - 1
+
+p "倒着数："
+rp 5..1
+    p count

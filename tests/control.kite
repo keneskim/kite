@@ -1,0 +1,21 @@
+total = 0
+rp 1..10
+    if count % 2 == 0
+        continue
+    total = total + count
+p "奇数和 =", total
+
+rp 3
+    p "循环 {count}"
+
+n = 0
+rp ut n == 3
+    n = n + 1
+p "停在第 {n} 次"
+
+rp 5..1
+    p count
+
+rp i in 1..2
+    rp j in 1..2
+        p "{i}-{j}"

@@ -1,0 +1,9 @@
+# 内层也用了 count，外层那个就看不见了
+rp 3
+    rp 2
+        p count
+
+# 给它们各自起名字，才分得清
+rp row in 1..3
+    rp col in 1..2
+        p row, col

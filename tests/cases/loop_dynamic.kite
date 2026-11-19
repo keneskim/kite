@@ -1,0 +1,28 @@
+fn endpoint(label, n)
+    p label
+    ret n
+
+start_at = 3
+stop_at = 1
+rp i in endpoint("起", start_at)..endpoint("止", stop_at)
+    p i
+    start_at = 9
+    stop_at = 8
+
+start_at = 1
+stop_at = 3
+rp start_at..stop_at
+    p count
+    stop_at = 1
+
+n = 3
+rp endpoint("次数", n)
+    p count
+    n = 0
+
+rp n
+    p "错误：零次"
+rp -2
+    p "错误：负次数"
+rp i in n..n
+    p "相同端点", i

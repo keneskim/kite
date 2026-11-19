@@ -1,0 +1,5 @@
+hero = 30
+slime = 28
+slime = slime - 7
+p "勇者砍了一刀，史莱姆剩 {slime}"
+p "勇者还是 {hero}"

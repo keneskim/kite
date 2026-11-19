@@ -1,0 +1,8 @@
+# 前提测试：函数里改数组，外面看得到吗
+fn fill(a, v)
+    rp i in 1..len(a)
+        a[i] = v
+
+xs = [0, 0, 0]
+fill(xs, 7)
+p xs

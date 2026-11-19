@@ -1,0 +1,25 @@
+# N 皇后：8x8 棋盘放 8 个皇后，标准答案 92
+fn safe(board, row, col)
+    if row == 1
+        ret 1
+    rp i in 1..row - 1
+        if board[i] == col
+            ret 0
+        if board[i] + i == col + row
+            ret 0
+        if board[i] - i == col - row
+            ret 0
+    ret 1
+
+fn place(board, row, n)
+    if row > n
+        ret 1
+    total = 0
+    rp col in 1..n
+        if safe(board, row, col)
+            board[row] = col
+            total = total + place(board, row + 1, n)
+    ret total
+
+board = [0, 0, 0, 0, 0, 0, 0, 0]
+p "8 皇后方案数：", place(board, 1, 8)

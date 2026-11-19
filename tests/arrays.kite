@@ -1,0 +1,14 @@
+xs = [5, 3, 9, 1]
+p "长度：", len(xs)
+
+xs[1] = 100
+sum_all = 0
+rp xs
+    sum_all = sum_all + count
+p "和：", sum_all
+p "第一：", xs[1], "最后：", xs[4]
+
+fn total(a)
+    ret sum(a)
+
+p "函数求和：", total(xs)

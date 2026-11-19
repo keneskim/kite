@@ -1,0 +1,5 @@
+slime = 28
+rp ut slime <= 0
+    slime = slime - 7
+    p "史莱姆剩 {slime}"
+p "战斗结束"

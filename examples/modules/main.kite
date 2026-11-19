@@ -1,0 +1,15 @@
+use "geo.kite" as geo
+
+record Marker
+    label: string
+    position: geo::Point
+
+fn move(marker: Marker, dx: number) -> Marker
+    ret Marker(marker.label, geo::shift(marker.position, dx))
+
+start = geo::Point(2, 3)
+marker = Marker("kite", start)
+original = marker
+marker = move(marker, 5)
+p "{original.label}: ({original.position.x}, {original.position.y})"
+p "{marker.label}: ({marker.position.x}, {marker.position.y})"

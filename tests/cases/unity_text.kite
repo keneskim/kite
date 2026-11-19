@@ -1,0 +1,5 @@
+s = "甲🙂𐐷é"
+p len(s), num(" \t+1.25e2 "), num(""), num("-0")
+third = 1 / 3
+small = 0.00000125
+p txt(third), small, "{small}"

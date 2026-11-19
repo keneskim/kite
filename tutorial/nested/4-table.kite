@@ -1,0 +1,6 @@
+# 五行乘法表
+rp i in 1..5
+    row = ""
+    rp j in 1..i
+        row = row + txt(j) + "×" + txt(i) + "=" + txt(i * j) + "  "
+    p row

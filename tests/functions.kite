@@ -1,0 +1,18 @@
+fn sq(x)
+    ret x * x
+
+fn greet(name)
+    ret "你好，" + name
+
+fn show(a)
+    p "值是 {a}"
+
+p sq(7)
+p greet("小明")
+show(3)
+
+fn fib(n)
+    if n < 2
+        ret n
+    ret fib(n - 1) + fib(n - 2)
+p fib(15)

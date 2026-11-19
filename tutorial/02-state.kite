@@ -1,0 +1,4 @@
+hero = 30
+slime = 28
+p "勇者血量：{hero}"
+p "史莱姆血量：{slime}"

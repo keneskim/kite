@@ -1,0 +1,37 @@
+use "geo.kite" as geo
+
+record Marker
+    label: string
+    position: geo::Point
+
+fn move_first(markers: Marker[], dx: number)
+    first = markers[1]
+    markers[1] = Marker(first.label, geo::shift(first.position, dx))
+
+fn first_x(points: geo::Point[]) -> number
+    ret points[1].x
+
+points = [geo::Point(2, 3), geo::Point(4, 5)]
+p "point: {first_x(points)}"
+markers = [Marker("a", points[1]), Marker("b", points[-1])]
+move_first(markers, 10)
+p "ends: {markers[1].position.x}, {markers[-1].position.x}"
+
+# Slices own their storage: replacing or appending does not change markers.
+copied = markers[1..-1]
+copied[-2] = Marker("copy", geo::Point(99, 0))
+copied.push(Marker("extra", geo::Point(100, 0)))
+p "copy: {markers[1].position.x}, {copied[1].position.x}; lengths: {len(markers)}, {len(copied)}"
+
+# An empty slice retains its element type; empty literals are unsupported.
+empty = markers[1..0]
+empty.push(Marker("only", geo::Point(7, 8)))
+p "empty slice: {len(empty)}, {empty[1].label}"
+
+# rp reads the live array, including replacements and appended elements.
+rp marker in markers
+    p "visit: {marker.label}, {marker.position.x}"
+    if marker.label == "a"
+        markers[-1] = Marker("changed", geo::Point(20, 30))
+        markers.push(Marker("new", geo::Point(40, 50)))
+p "length: {len(markers)}"

@@ -1,0 +1,11 @@
+fn fib(n)
+    if n < 2
+        ret n
+    ret fib(n - 1) + fib(n - 2)
+
+p "fib(20) = {fib(20)}"
+
+fn greet(who)
+    ret "你好，" + who
+
+p greet("小明")

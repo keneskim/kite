@@ -1,0 +1,14 @@
+# 一个网页界面：公里换英里
+fn page()
+    km = form('km').num
+    ret "<!doctype html><meta charset=utf-8>
+<title>单位换算</title>
+<body style='font-family:system-ui;margin:40px;background:#111;color:#eee'>
+<h1>公里换算</h1>
+<form>
+  公里：<input name=km value='{html(form('km'))}' style='font-size:20px;padding:6px'>
+  <button style='font-size:18px;padding:6px 14px'>换算</button>
+</form>
+<h2>{km} 公里 = {km * 0.6214} 英里</h2>"
+
+serve(8099, page)

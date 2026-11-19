@@ -1,0 +1,33 @@
+# 用 kite 写 Unity 游戏逻辑
+
+fn clamp(v, lo, hi)
+    if v < lo
+        ret lo
+    if v > hi
+        ret hi
+    ret v
+
+fn speed()
+    ret 7
+
+fn start()
+    p "游戏开始，速度 {speed()}"
+
+fn update()
+    s = speed()
+    if key("left")
+        move_x(0 - s)
+    if key("right")
+        move_x(s)
+    if key("space") && on_ground()
+        jump(12)
+
+    # 掉出世界就拉回来
+    if y() < -10
+        set_pos(0, 2)
+        p "掉下去了，拉回来"
+
+    # 数一下跑了多久
+    t = clamp(y(), -100, 100)
+    if t > 50
+        p "太高了"

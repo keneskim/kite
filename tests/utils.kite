@@ -1,0 +1,8 @@
+p abs(-7), floor(3.7), round(3.5), sqrt(16), pow(2, 10)
+p "abc".rep(3)
+p "hello world".find("world")
+p "hello world".find("xyz")
+p "kite language".sub(5, 4)
+p "a-b-c".repl("-", "+")
+p ts() > 0
+p hex(255), bin(5), hex(0)

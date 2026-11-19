@@ -1,0 +1,57 @@
+# 待办清单：浏览器里增删改，数据存在 todo.txt
+# 每行格式：0 或 1（未完成/完成）+ 空格 + 内容
+
+fn toggle(line)
+    if line[1..1] == "0"
+        ret "1" + line[2..-1]
+    ret "0" + line[2..-1]
+
+fn page()
+    lines = read("todo.txt").split("\n")
+    add = form("add")
+    done = form("done")
+    remove_id = form("del")
+
+    out = ""
+    rp i in 1..len(lines)
+        line = lines[i]
+        if line.len == 0
+            continue
+        if done != "" && done.num == i
+            line = toggle(line)
+        if remove_id != "" && remove_id.num == i
+            continue
+        if out != ""
+            out = out + "\n"
+        out = out + line
+
+    if add != ""
+        if out != ""
+            out = out + "\n"
+        out = out + "0 " + add
+
+    write("todo.txt", out)
+
+    items = out.split("\n")
+    list = ""
+    rp i in 1..len(items)
+        line = items[i]
+        if line.len == 0
+            continue
+        mark = line[1..1]
+        name = line[3..-1]
+        box = "☐"
+        if mark == "1"
+            box = "☑"
+        list = list + "<li>" + box + " " + html(name)
+        list = list + " <a href='/?done=" + txt(i) + "'>切换</a>"
+        list = list + " <a href='/?del=" + txt(i) + "'>删</a></li>"
+
+    ret "<!doctype html><meta charset=utf-8>
+<body style='font-family:system-ui;margin:30px;background:#111;color:#eee'>
+<h1>待办清单</h1>
+<form><input name=add placeholder='要做的事' style='font-size:18px;padding:6px'>
+<button>添加</button></form>
+<ul style='font-size:18px;line-height:2'>{list}</ul>"
+
+serve(8099, page)

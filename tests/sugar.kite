@@ -1,0 +1,17 @@
+xs = [3, 1, 2]
+p xs
+sort(xs)
+p "排序后：{xs}"
+
+words = split("banana,apple,cherry")
+p words
+p words.len
+p words.join("-")
+
+s = "  Hello  "
+p s.trim.up
+p s.trim.len
+
+p (7 + 3).txt
+p join(words)
+p "a,b".split

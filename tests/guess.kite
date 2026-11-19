@@ -1,0 +1,20 @@
+# 猜数字：1 到 100，最多 10 次
+seed(7)
+target = rand(100) + 1
+tries = 0
+won = 0
+
+rp ut tries >= 10
+    g = ask("猜一个 1-100 的数：").num
+    tries = tries + 1
+    if g < target
+        p "小了"
+    elif g > target
+        p "大了"
+    else
+        p "猜对了！用了 {tries} 次"
+        won = 1
+        break
+
+if won == 0
+    p "次数用完了，答案是 {target}"

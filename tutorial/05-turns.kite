@@ -1,0 +1,17 @@
+hero = 30
+slime = 28
+turn = 1
+
+rp ut hero <= 0 || slime <= 0
+    if turn % 2 == 1
+        slime = slime - 7
+        p "第 {turn} 回合：勇者攻击，史莱姆剩 {slime}"
+    else
+        hero = hero - 5
+        p "第 {turn} 回合：史莱姆攻击，勇者剩 {hero}"
+    turn = turn + 1
+
+if slime <= 0
+    p "勇者赢了！"
+else
+    p "勇者倒下了……"
