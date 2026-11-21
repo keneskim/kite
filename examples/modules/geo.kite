@@ -1,6 +1,4 @@
-record Point
-    x: number
-    y: number
+record Point(x: number, y: number)
 
-fn shift(point: Point, dx: number) -> Point
+fn shift(point, dx)
     ret Point(point.x + dx, point.y)

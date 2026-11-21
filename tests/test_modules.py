@@ -43,6 +43,27 @@ class ModuleTests(unittest.TestCase):
         self.assertEqual(pair.name, entry.exprs[1].target.callee.id)
         kite.Typer(block).run()
 
+    def test_bare_import_and_inline_record(self):
+        self.write("lib.kite", "record Point(x: number, y: number)\n\n"
+                   "fn shift(point, dx)\n    ret Point(point.x + dx, point.y)\n")
+        block = self.load('use "lib.kite"\n'
+                          'p shift(Point(1, 2), 3).x\n')
+        kite.Typer(block).run()
+
+    def test_bare_import_type_annotation(self):
+        self.write("lib.kite", "record Point(x: number, y: number)\n")
+        block = self.load('use "lib.kite"\n'
+                          'fn local(point: Point) -> number\n    ret point.x\n'
+                          'p local(Point(4, 5))\n')
+        kite.Typer(block).run()
+
+    def test_bare_import_collision(self):
+        self.write("a.kite", "fn same() -> number\n    ret 1\n")
+        self.write("b.kite", "fn same() -> number\n    ret 2\n")
+        with self.assertRaises(kite.KiteError) as caught:
+            self.load('use "a.kite"\nuse "b.kite"\n')
+        self.assertIn("same", caught.exception.msg)
+
     def test_qualified_record_array_annotations(self):
         self.write("lib/points.kite", "record Point\n    x: number\n")
         self.write("lib/read.kite", 'use "points.kite" as geo\n'
@@ -116,6 +137,14 @@ class ModuleTests(unittest.TestCase):
         self.assertIsInstance(declaration, kite.ExternDef)
         self.assertEqual(declaration.symbol, "native_f")
         self.assertEqual(declaration.name, entry.exprs[0].callee.id)
+
+    def test_simple_extern_uses_its_name(self):
+        self.write("lib.kite", "extern native_f(x: number) -> number\n")
+        declaration, entry = self.load('use "lib.kite"\np native_f(3)\n').stmts
+        self.assertIsInstance(declaration, kite.ExternDef)
+        self.assertEqual(declaration.symbol, "native_f")
+        self.assertEqual(declaration.name, entry.exprs[0].callee.id)
+        kite.Typer(self.load('use "lib.kite"\np native_f(3)\n')).run()
 
     def test_typing_error_reports_imported_file(self):
         other = self.write("lib.kite", "fn f(x: number) -> number\n    if x\n        ret 1\n")

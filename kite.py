@@ -498,6 +498,23 @@ class Parser:
     def parse_record(self):
         line = self.advance().line
         name = self.expect("NAME").value
+        if self.match("OP", "("):
+            fields = []
+            if not self.check("OP", ")"):
+                while True:
+                    field = self.expect("NAME")
+                    self.expect("OP", ":")
+                    typ = self.parse_type()
+                    if elem_of(typ) is not None:
+                        raise KiteError("记录字段类型不能是数组", field.line)
+                    fields.append((field.value, typ))
+                    if not self.match("OP", ","):
+                        break
+            self.expect("OP", ")")
+            if not fields:
+                raise KiteError("记录至少要有一个字段", line)
+            self.expect("NEWLINE")
+            return RecordDef(name, fields, line)
         self.expect("NEWLINE")
         self.expect("INDENT")
         fields = []
@@ -520,9 +537,12 @@ class Parser:
             raise KiteError("这一行缩进不够", t.line)
         if t.kind == "NAME" and t.value == "record" and self.peek(1).kind == "NAME":
             return self.parse_record()
-        if (t.kind == "NAME" and t.value == "extern" and self.peek(1).value == "c"
-                and self.peek(2).value == "fn"):
-            return self.parse_extern()
+        if t.kind == "NAME" and t.value == "extern":
+            if self.peek(1).value == "c" and self.peek(2).value == "fn":
+                return self.parse_extern()
+            if (self.peek(1).kind == "NAME" and self.peek(2).kind == "OP"
+                    and self.peek(2).value == "("):
+                return self.parse_extern_simple()
         if t.kind == "NAME" and t.value in RETIRED:
             raise KiteError("「%s」这一版已经没有了。%s"
                             % (t.value, RETIRED[t.value]), t.line)
@@ -607,6 +627,13 @@ class Parser:
         self.expect("NEWLINE")
         return ExternDef(name, params, ret, token.value, line)
 
+    def parse_extern_simple(self):
+        line = self.advance().line
+        name = self.expect("NAME").value
+        params, ret = self.parse_signature_rest()
+        self.expect("NEWLINE")
+        return ExternDef(name, params, ret, name, line)
+
     def parse_fn(self):
         line = self.advance().line
         name, params, ret = self.parse_fn_signature()
@@ -614,6 +641,10 @@ class Parser:
 
     def parse_fn_signature(self):
         name = self.expect("NAME").value
+        params, ret = self.parse_signature_rest()
+        return name, params, ret
+
+    def parse_signature_rest(self):
         self.expect("OP", "(")
         params = []
         if not self.check("OP", ")"):
@@ -629,7 +660,7 @@ class Parser:
         ret = None
         if self.match("OP", "->"):
             ret = self.parse_type()
-        return name, params, ret
+        return params, ret
 
     # -- 表达式
 
@@ -3243,7 +3274,7 @@ def load_program(src, path=None):
 def require_backend(program, target):
     for stmt in program.stmts:
         if isinstance(stmt, ExternDef):
-            raise KiteError("%s 后端不支持 extern c" % target, stmt.line, getattr(stmt, "source_path", None))
+            raise KiteError("%s 后端不支持 extern" % target, stmt.line, getattr(stmt, "source_path", None))
 
 
 def compile_source(src, path=None):

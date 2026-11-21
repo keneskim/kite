@@ -40,9 +40,7 @@ node examples/hello.js
 下面的程序把商品与价格放在同一个记录数组中，再逐项累计。记录字段有类型，`price` 的参数和返回值则由转译器推断。
 
 ```kite
-record Item
-    name: string
-    amount: number
+record Item(name: string, amount: number)
 
 fn price(item)
     ret item.amount
@@ -63,7 +61,13 @@ p "共 {len(items)} 件，合计 {total} 元"
 
 - **数组从 1 开始。** `items[1]` 取第一项，`items[-1]` 取最后一项，`items[1..-1]` 创建独立的数组副本。
 - **记录字段不可变。** 可用新记录替换数组元素。记录数组支持 `push`、切片、遍历和函数参数。
-- **模块按文件组织。** `use "geo.kite" as geo` 从当前文件所在目录加载模块，再以 `geo::Point(2, 3)` 访问其中的声明。
+- **模块按文件组织。** `use "geo.kite"` 从当前文件所在目录加载模块，其中的 `Point`、`shift` 等名字可以直接使用。
+
+```kite
+use "geo.kite"
+
+p shift(Point(2, 3), 5).x
+```
 
 更多语法和完整程序见 [语言教程](docs/kite.md)与[模块、记录和外部 C 函数指南](docs/modules.md)。
 
@@ -80,7 +84,7 @@ p "共 {len(items)} 件，合计 {total} 元"
 | Java | `python kite.py examples/hello.kite --java` | 用 JDK 11+ 执行 `javac -encoding UTF-8 examples/Hello.java`，再执行 `java -cp examples Hello`。 |
 | Unity C# | `python kite.py unity/game.kite --unity` | 将生成的 `Game.cs` 加入 Unity 项目，按指南安装到场景中的对象上。 |
 
-C、JavaScript 和 Java 支持数字数组、文本数组和二维表。Unity 后端支持一维记录数组，以及面向 Unity 的输入和物理辅助函数。JavaScript 的标准输入和文件操作依赖 Node.js。`serve` 本地网页和 `extern c fn` 属于 C 后端，后者目前只接受 `number` 参数和返回值，对应 C 的 `double`。
+C、JavaScript 和 Java 支持数字数组、文本数组和二维表。Unity 后端支持一维记录数组，以及面向 Unity 的输入和物理辅助函数。JavaScript 的标准输入和文件操作依赖 Node.js。`serve` 本地网页和 `extern` 属于 C 后端，后者目前只接受 `number` 参数和返回值，对应 C 的 `double`。
 
 各目标的详细要求见 [JavaScript](docs/js.md)、[Java](docs/java.md)、[Unity](docs/unity.md)和 [C 外部函数](docs/modules.md#调用-c-外部函数)。
 

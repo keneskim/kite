@@ -27,8 +27,9 @@ def _parse(core, source, path):
                 target = Path(raw)
                 if not raw or "\n" in raw or "\r" in raw or "\0" in raw or target.anchor:
                     raise core.KiteError("use 需要一个相对文件路径", line)
-                self.expect("NAME", "as")
-                alias = self.expect("NAME").value
+                alias = None
+                if self.match("NAME", "as"):
+                    alias = self.expect("NAME").value
                 self.expect("NEWLINE")
                 imports.append((target, alias, line))
                 self.skip_newlines()
@@ -49,6 +50,7 @@ class _Module:
         self.path = path
         self.prefix = prefix
         self.exports = {}
+        self.imports = {}
         self.aliases = {}
 
 
@@ -91,9 +93,20 @@ class _Loader:
         key = os.path.normcase(path) if path is not None else None
         self.active.append((key, path))
         for target, alias, line in imports:
-            if alias in module.aliases:
-                raise self.error("模块别名「%s」重复了" % alias, path, line)
-            module.aliases[alias] = self.load_import(target, path, line)
+            imported = self.load_import(target, path, line)
+            if alias is not None:
+                if alias in module.aliases:
+                    raise self.error("模块别名「%s」重复了" % alias, path, line)
+                module.aliases[alias] = imported
+                continue
+            for name, canonical in imported.exports.items():
+                if name in module.exports:
+                    raise self.error("导入的名字「%s」和本文件声明冲突" % name, path, line)
+                if name in module.imports:
+                    if module.imports[name] != canonical:
+                        raise self.error("导入的名字「%s」重复了" % name, path, line)
+                    continue
+                module.imports[name] = canonical
         self.active.pop()
 
         self.link_node(program, module)
@@ -135,15 +148,19 @@ class _Loader:
             if name not in imported.exports:
                 raise self.error("模块「%s」没有声明「%s」" % (alias, name), module.path, line)
             return imported.exports[name]
+        if kind == "field":
+            return symbol
         if kind == "variable":
             if module.prefix and symbol in self.entry.exports:
                 return module.prefix + "local::" + symbol
             return symbol
-        if kind == "type" and symbol in self.core.TYPE_NAMES:
-            return symbol
         if symbol in module.exports:
             return module.exports[symbol]
-        if not module.prefix or kind == "field":
+        if symbol in module.imports:
+            return module.imports[symbol]
+        if kind == "type" and symbol in self.core.TYPE_NAMES:
+            return symbol
+        if not module.prefix:
             return symbol
         if kind == "function" and (symbol in self.core.BUILTINS or symbol in self.core._UNITY_PARAMS):
             return symbol
@@ -151,8 +168,8 @@ class _Loader:
         raise self.error("模块内没有叫「%s」的%s" % (symbol, label), module.path, line)
 
     def bind(self, name, module, line):
-        if module.prefix and name in module.exports:
-            raise self.error("「%s」是模块声明名，不能用作变量名" % name, module.path, line)
+        if name in module.imports or (module.prefix and name in module.exports):
+            raise self.error("「%s」是声明名，不能用作变量名" % name, module.path, line)
         return self.resolve(name, module, line, "variable")
 
     def link_node(self, node, module, kind="variable"):

@@ -90,7 +90,7 @@ class Runner:
         return target
 
     def native_binding(self, case, work):
-        case.write_text('extern c fn scale(x: number) -> number = "host_test_scale"\np scale(7)\n', encoding="utf-8")
+        case.write_text('extern host_test_scale(x: number) -> number\np host_test_scale(7)\n', encoding="utf-8")
         source = self.translate(case, "c", work)
         helper = work / "helper.c"
         helper.write_text("double host_test_scale(double x) { return x * 2.5; }\n", encoding="ascii")
@@ -341,8 +341,8 @@ def main():
                         if backend == "c":
                             runner.native_binding(case, case_dir)
                         else:
-                            case.write_text('extern c fn scale(x: number) -> number = "host_scale"\n', encoding="utf-8")
-                            runner.translate(case, backend, case_dir, error=("不支持 extern c", 1))
+                            case.write_text('extern host_scale(x: number) -> number\n', encoding="utf-8")
+                            runner.translate(case, backend, case_dir, error=("不支持 extern", 1))
                     elif name in RECORD_REJECT:
                         text, message, line = RECORD_REJECT[name]
                         case.write_text(text, encoding="utf-8")
